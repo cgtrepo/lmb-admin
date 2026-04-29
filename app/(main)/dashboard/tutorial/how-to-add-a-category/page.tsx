@@ -1,0 +1,29 @@
+// import TutorialForAddCategory from "../(components)/tutorial-for-add-a-category";
+import { Metadata } from "next";
+import VideoPlayerLayout from "../(components)/videos-player-layout";
+import { videosMedia } from "../(data)/videos-items-data";
+import PageBreadcrumbHeader from "../../(components)/(ui)/page-breadcrumb-header";
+
+export const metadata: Metadata = {
+  title: "Tableau de bord LMB | Tutoriels",
+  description: "Admin Accueille",
+};
+
+export default function HowToAddCategory() {
+  return (
+    <div className="flex flex-col space-y-6">
+      {/* HEADER */}
+
+      <PageBreadcrumbHeader
+        breadcrumbs={[
+          { label: "Tutoriel", href: "/dashboard/tutorial" },
+          { label: "Comment ajouter une nouvelle categorie?" },
+        ]}
+      />
+
+      <div className="p-6 w-full space-y-4">
+        <VideoPlayerLayout videos={videosMedia} />
+      </div>
+    </div>
+  );
+}
