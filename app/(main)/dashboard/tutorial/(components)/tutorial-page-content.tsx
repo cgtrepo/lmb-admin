@@ -14,7 +14,10 @@ export default function TutorialPageContent() {
       <div className="max-w-6xl">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
           {tutorialActionData.map((tuto, i) => (
-            <div key={i} className="flex items-center justify-center p-6">
+            <div
+              key={i}
+              className="flex items-center justify-center p-0 md:p-6"
+            >
               <VideoCard
                 title={tuto.title}
                 image={tuto.image}

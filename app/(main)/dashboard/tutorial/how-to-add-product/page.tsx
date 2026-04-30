@@ -20,7 +20,7 @@ export default function HowToAddProduct() {
         ]}
       />
 
-      <div className="p-6 w-full space-y-4">
+      <div className="md:p-6 p-6 w-full space-y-4">
         <VideoPlayerLayout videos={videosMedia} />
       </div>
     </div>
