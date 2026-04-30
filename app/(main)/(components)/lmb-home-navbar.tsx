@@ -6,11 +6,17 @@ import { Bell, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { countries } from "../(data)/home-actions-data";
 import { Country } from "../(types)/home-data-type";
+import { useSidebar } from "../(context)/sidebar-provider";
+import { usePathname } from "next/navigation";
 
 export default function LmbHomeNavbar() {
+  const pathname = usePathname();
+  const { setSidebarOpen } = useSidebar();
   const [selected, setSelected] = useState<Country>(countries[0]);
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  // Check if we're inside dashboard
+  const isDashboard = pathname.startsWith("/dashboard");
 
   // Load saved country
   useEffect(() => {
@@ -86,6 +92,22 @@ export default function LmbHomeNavbar() {
           )}
         </div>
       </div>
+
+      {isDashboard && (
+        <div className="flex md:hidden">
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="cursor-pointer"
+          >
+            <Image
+              src="/iconify-marketeq-menu.svg"
+              alt="menu"
+              width={55}
+              height={55}
+            />
+          </button>
+        </div>
+      )}
     </div>
   );
 }

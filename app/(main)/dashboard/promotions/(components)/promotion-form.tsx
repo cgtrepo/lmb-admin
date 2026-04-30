@@ -53,7 +53,7 @@ export default function PromotionForm() {
         </div>
 
         {/* DISCOUNT TYPE + VALUE */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* DISCOUNT TYPE */}
           <div className="relative">
             <label className="text-sm font-medium block mb-1">
@@ -105,7 +105,7 @@ export default function PromotionForm() {
             Période de validité
           </label>
 
-          <div className="flex  w-full gap-3">
+          <div className="flex md:flex-row flex-col w-full gap-3">
             <div className="flex items-center w-full gap-2">
               <span>De</span>
               <input

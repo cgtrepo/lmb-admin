@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import LmbHomeFooter from "./(components)/lmb-home-footer";
 import LmbHomeNavbar from "./(components)/lmb-home-navbar";
+import { SidebarProvider } from "./(context)/sidebar-provider";
 
 export const metadata: Metadata = {
   title: "Tableau de bord LMB | Accueil",
@@ -14,10 +15,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="min-h-screen bg-[#e8edf7] flex flex-col">
-      <LmbHomeNavbar />
-      <main className="">{children}</main>
-      <LmbHomeFooter />
-    </div>
+    <SidebarProvider>
+      <div className="min-h-screen bg-[#e8edf7] flex flex-col">
+        <LmbHomeNavbar />
+        <main>{children}</main>
+        <LmbHomeFooter />
+      </div>
+    </SidebarProvider>
   );
 }

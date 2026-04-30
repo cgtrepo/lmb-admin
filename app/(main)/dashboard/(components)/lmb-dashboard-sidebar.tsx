@@ -6,9 +6,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { menu, userConnected } from "../(data)/dashboard-data";
+import { useSidebar } from "../../(context)/sidebar-provider";
 
 export default function LmbDashboardSidebar() {
   const pathname = usePathname();
+  const { setSidebarOpen } = useSidebar();
 
   return (
     <aside className="border flex flex-col items-center border-gray-300 shadow-sm rounded-2xl h-min w-13">
@@ -19,6 +21,7 @@ export default function LmbDashboardSidebar() {
             <Link
               key={i}
               href={item.href}
+              onClick={() => setSidebarOpen(false)} //
               className={`transition-all duration-300 px-2.5 flex items-center justify-center  cursor-pointer py-2 w-full ${active ? "bg-gray-300 border-r-4 border-primary" : "hover:bg-gray-300"}`}
             >
               <div>
