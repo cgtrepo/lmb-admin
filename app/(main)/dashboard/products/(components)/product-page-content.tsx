@@ -118,17 +118,6 @@ export default function ProductPageContent() {
           </div>
 
           <div className="space-y-3 mb-4">
-            <label className="text-sm font-semibold block mb-1">
-              Prix Unitaire
-            </label>
-            <input
-              type="number"
-              placeholder="12.00"
-              className="w-full border border-gray-300 bg-white rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          <div className="space-y-3 mb-4">
             <label className="text-sm font-semibold block mb-1">Garantie</label>
             <select
               className="w-full border border-gray-300 bg-white rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"

@@ -1,7 +1,9 @@
 "use client";
 
+import { useEffect } from "react";
 import { useSidebar } from "../(context)/sidebar-provider";
 import LmbDashboardSidebar from "./(components)/lmb-dashboard-sidebar";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function DashboardLayout({
   children,
@@ -9,6 +11,21 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const { openSide, setSidebarOpen } = useSidebar();
+
+  useEffect(() => {
+    if (openSide) {
+      document.body.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+    };
+  }, [openSide]);
 
   return (
     <div className="min-h-screen flex">
@@ -18,28 +35,47 @@ export default function DashboardLayout({
       </div>
 
       {/* Mobile */}
-      <div
-        className={`md:hidden fixed inset-0 z-50 flex ${
-          openSide ? "pointer-events-auto" : "pointer-events-none hidden"
-        }`}
-      >
-        {/* Sidebar */}
-        <div
-          className={` bg-white h-full w-20 flex items-center justify-center shadow-lg transform transition-transform duration-500 ease-in-out ${
-            openSide ? "translate-x-0" : "-translate-x-full hidden"
-          }`}
-        >
-          <LmbDashboardSidebar />
-        </div>
+      <AnimatePresence>
+        {openSide && (
+          <motion.div
+            className="md:hidden fixed inset-0 z-50 flex"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            {/* Sidebar */}
+            <motion.div
+              className="w-20 flex items-center justify-center bg-white h-full shadow-xl"
+              initial={{ x: -300 }}
+              animate={{ x: 0 }}
+              exit={{ x: -300 }}
+              transition={{
+                type: "spring",
+                stiffness: 260,
+                damping: 25,
+              }}
+              drag="x"
+              dragConstraints={{ left: -300, right: 0 }}
+              onDragEnd={(e, info) => {
+                if (info.offset.x < -100) {
+                  setSidebarOpen(false); // swipe to close
+                }
+              }}
+            >
+              <LmbDashboardSidebar />
+            </motion.div>
 
-        {/* Overlay */}
-        <div
-          className={`flex-1 bg-black/50 transition-opacity duration-500 ${
-            openSide ? "opacity-100" : "opacity-0"
-          }`}
-          onClick={() => setSidebarOpen(false)}
-        />
-      </div>
+            {/* Overlay */}
+            <motion.div
+              className="flex-1 bg-black/40 backdrop-blur-sm"
+              onClick={() => setSidebarOpen(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <div className="flex-1 flex flex-col">
         <main className="p-4 md:px-6 md:pb-6 md:pt-0">{children}</main>

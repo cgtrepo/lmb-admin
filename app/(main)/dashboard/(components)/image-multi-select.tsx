@@ -31,31 +31,6 @@ export default function ImageMultiSelect() {
     setImages((prev) => prev.filter((p, i) => i !== index));
   };
 
-  const handleReplace = (index: number) => {
-    inputRef.current?.click();
-
-    const handler = (e: Event) => {
-      const target = e.target as HTMLInputElement;
-      const file = target.files?.[0];
-      if (!file) return;
-
-      const updated = [...images];
-      updated[index] = {
-        file,
-        preview: URL.createObjectURL(file),
-      };
-
-      setImages(updated);
-
-      if (inputRef.current) {
-        inputRef.current.value = "";
-        inputRef.current.removeEventListener("change", handler);
-      }
-    };
-
-    inputRef.current?.addEventListener("change", handler);
-  };
-
   const formatSize = (size: number) => {
     return (size / 1024 / 1024).toFixed(2) + " MB";
   };
@@ -99,17 +74,7 @@ export default function ImageMultiSelect() {
             />
 
             {/* OVERLAY */}
-            <div className="absolute inset-0 bg-black/30 opacity-0 hover:opacity-100 transition flex items-center justify-center gap-3">
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleReplace(index);
-                }}
-                className="bg-white text-black cursor-pointer px-3 py-1 rounded text-sm"
-              >
-                Remplacer
-              </button>
-
+            <div className="absolute top-0 right-0 flex items-center justify-center gap-3">
               <button
                 onClick={(e) => {
                   e.stopPropagation();
@@ -117,7 +82,7 @@ export default function ImageMultiSelect() {
                 }}
                 className="bg-red-500 text-white cursor-pointer p-2 rounded-full"
               >
-                <X size={16} />
+                <X size={12} />
               </button>
             </div>
 

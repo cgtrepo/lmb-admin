@@ -34,7 +34,7 @@ const productDataColumns: TableColumn<Product>[] = [
     render: (item) => (
       <div className="flex items-center justify-between">
         {" "}
-        {item.availableQuantity} FCFA
+        {item.availableQuantity}
       </div>
     ),
   },

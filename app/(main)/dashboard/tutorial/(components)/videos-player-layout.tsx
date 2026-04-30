@@ -14,7 +14,7 @@ export default function VideoPlayerLayout({ videos }: VideosPropsTab) {
         <video
           key={currentVideo.url}
           controls
-          className="w-full h-75 md:h-100 object-cover"
+          className="w-full h-56 md:h-100 object-cover"
         >
           <source src={currentVideo.url} type="video/mp4" />
           Votre navigateur ne prend pas en charge la balise vidéo.
